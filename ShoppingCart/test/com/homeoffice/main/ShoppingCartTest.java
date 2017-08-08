@@ -1,6 +1,7 @@
 package com.homeoffice.main;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
+import static org.hamcrest.Matchers.*;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -31,7 +32,19 @@ public class ShoppingCartTest
       @Override
       public void run()
       {
-        shoppingCart.addItem(new Meat(1.99, 3, "Chicken"));
+        shoppingCart.addItem(new Meat(2.00, 3, "Chicken"));
+
+        Thread.currentThread();
+        try
+        {
+          Thread.sleep(1000);
+        }
+        catch (InterruptedException e)
+        {
+          e.printStackTrace();
+        }
+
+        assertThat(shoppingCart.calculatePrice(), is("6.00"));
       }
     };
 
@@ -40,16 +53,11 @@ public class ShoppingCartTest
       @Override
       public void run()
       {
-        shoppingCart.addItem(new Meat(1.49, 5, "Turkey"));
+        shoppingCart.addItem(new Meat(1.00, 5, "Turkey"));
       }
     };
 
-    Thread t1 = new Thread(run1);
-    Thread t2 = new Thread(run2);
-
-    t1.start();
-    t2.start();
-
-    System.out.println(shoppingCart.calculatePrice());
+    new Thread(run1).start();
+    new Thread(run2).start();
   }
 }
