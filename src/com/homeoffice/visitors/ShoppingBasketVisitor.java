@@ -3,7 +3,7 @@ import com.homeoffice.item.elements.Fruit;
 import com.homeoffice.item.elements.Meat;
 import com.homeoffice.item.elements.Milk;
 
-public interface ShoppingCartVisitor
+public interface ShoppingBasketVisitor
 {
   public double visit(Fruit fruit);
   public double visit(Meat meat);

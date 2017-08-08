@@ -8,20 +8,20 @@ import org.junit.Test;
 
 import com.homeoffice.item.elements.Meat;
 
-public class ShoppingCartTest
+public class ShoppingBasketTest
 {
-  private static ShoppingCart shoppingCart;
+  private static ShoppingBasket shoppingBasket;
 
   @BeforeClass
   public static void testSetup()
   {
-    shoppingCart = ShoppingCart.getInstance();
+    shoppingBasket = ShoppingBasket.getInstance();
   }
 
   @Test
-  public void shouldCreateInstanceOfShoppingCart()
+  public void shouldCreateInstanceOfShoppingBasket()
   {
-    assertNotNull(shoppingCart);
+    assertNotNull(shoppingBasket);
   }
 
   @Test
@@ -32,7 +32,7 @@ public class ShoppingCartTest
       @Override
       public void run()
       {
-        shoppingCart.addItem(new Meat(2.00, 3, "Chicken"));
+        shoppingBasket.addItem(new Meat(2.00, 3, "Chicken"));
 
         Thread.currentThread();
         try
@@ -44,7 +44,7 @@ public class ShoppingCartTest
           e.printStackTrace();
         }
 
-        assertThat(shoppingCart.calculatePrice(), is("6.00"));
+        assertThat(shoppingBasket.calculatePrice(), is("6.00"));
       }
     };
 
@@ -53,11 +53,23 @@ public class ShoppingCartTest
       @Override
       public void run()
       {
-        shoppingCart.addItem(new Meat(1.00, 5, "Turkey"));
+        shoppingBasket.addItem(new Meat(1.00, 5, "Turkey"));
       }
     };
 
     new Thread(run1).start();
     new Thread(run2).start();
+  }
+
+  @Test
+  public void shouldAddAnItemToTheShoppingBasket()
+  {
+
+  }
+
+  @Test
+  public void shouldCalculateTotalPriceOfShoppingBasket()
+  {
+
   }
 }

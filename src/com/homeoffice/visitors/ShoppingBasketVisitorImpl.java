@@ -5,7 +5,7 @@ import com.homeoffice.item.elements.Fruit;
 import com.homeoffice.item.elements.Meat;
 import com.homeoffice.item.elements.Milk;
 
-public class ShoppingCartVisitorImpl implements ShoppingCartVisitor
+public class ShoppingBasketVisitorImpl implements ShoppingBasketVisitor
 {
   private DecimalFormat df = new DecimalFormat("#.##");
 

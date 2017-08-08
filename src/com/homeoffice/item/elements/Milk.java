@@ -1,6 +1,6 @@
 package com.homeoffice.item.elements;
 import com.homeoffice.item.Item;
-import com.homeoffice.visitors.ShoppingCartVisitor;
+import com.homeoffice.visitors.ShoppingBasketVisitor;
 
 public class Milk implements Item
 {
@@ -47,7 +47,7 @@ public class Milk implements Item
   }
 
   @Override
-  public double accept(ShoppingCartVisitor visitor)
+  public double accept(ShoppingBasketVisitor visitor)
   {
     return visitor.visit(this);
   }

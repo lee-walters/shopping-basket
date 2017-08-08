@@ -1,7 +1,7 @@
 package com.homeoffice.item;
-import com.homeoffice.visitors.ShoppingCartVisitor;
+import com.homeoffice.visitors.ShoppingBasketVisitor;
 
 public interface Item
 {
-  public double accept(ShoppingCartVisitor visitor);
+  public double accept(ShoppingBasketVisitor visitor);
 }
