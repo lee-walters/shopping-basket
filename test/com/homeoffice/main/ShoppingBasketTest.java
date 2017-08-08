@@ -1,12 +1,15 @@
 package com.homeoffice.main;
 
-import static org.junit.Assert.*;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertThat;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import com.homeoffice.item.elements.Fruit;
 import com.homeoffice.item.elements.Meat;
+import com.homeoffice.item.elements.Milk;
 
 public class ShoppingBasketTest
 {
@@ -44,7 +47,7 @@ public class ShoppingBasketTest
           e.printStackTrace();
         }
 
-        assertThat(shoppingBasket.calculatePrice(), is("6.00"));
+        assertThat(shoppingBasket.calculateTotalPrice(), is(6.00));
       }
     };
 
@@ -64,12 +67,35 @@ public class ShoppingBasketTest
   @Test
   public void shouldAddAnItemToTheShoppingBasket()
   {
+    int preAdditionSize = shoppingBasket.getItemsCount();
+    shoppingBasket.addItem(new Milk(0.45, 2, "Semi-skimmed"));
 
+    assertThat(shoppingBasket.getItemsCount(), is(preAdditionSize + 1));
   }
 
   @Test
   public void shouldCalculateTotalPriceOfShoppingBasket()
   {
+    double initialTotalPrice = shoppingBasket.calculateTotalPrice();
 
+    Fruit pear = new Fruit(0.70, 1, "Pear");
+
+    shoppingBasket.addItem(pear);
+
+    assertThat(shoppingBasket.calculateTotalPrice(), is(initialTotalPrice + (pear.getPricePerKg() * pear.getWeight())));
+  }
+
+  @Test
+  public void shouldUseDefaultUnitCostValueIfRequired()
+  {
+    double initialTotalPrice = shoppingBasket.calculateTotalPrice();
+
+    Meat chicken = new Meat(5, "Chicken");
+
+    shoppingBasket.addItem(chicken);
+
+    double postAdditionPrice = shoppingBasket.calculateTotalPrice();
+
+    assertThat(postAdditionPrice - initialTotalPrice, is(9.95));
   }
 }

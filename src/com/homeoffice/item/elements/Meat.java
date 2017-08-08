@@ -1,12 +1,31 @@
 package com.homeoffice.item.elements;
 import com.homeoffice.item.Item;
+import com.homeoffice.item.defaults.UnitCost;
 import com.homeoffice.visitors.ShoppingBasketVisitor;
 
+/**
+ * Concrete item
+ *
+ */
 public class Meat implements Item
 {
   private double pricePerKg;
   private double weight;
   private String name;
+
+  /**
+   * Overloaded constructor to use default unit cost
+   *
+   * @param weight
+   * @param name
+   */
+  public Meat(double weight, String name)
+  {
+    super();
+    this.pricePerKg = UnitCost.DEFAULT_MEAT.getValue();
+    this.weight = weight;
+    this.name = name;
+  }
 
   public Meat(double pricePerKg, double weight, String name)
   {
@@ -47,9 +66,15 @@ public class Meat implements Item
   }
 
   @Override
-  public double accept(ShoppingBasketVisitor visitor)
+  public double count(ShoppingBasketVisitor visitor)
   {
-    return visitor.visit(this);
+    return visitor.visitCost(this);
+  }
+
+  @Override
+  public String summary(ShoppingBasketVisitor visitor)
+  {
+    return visitor.visitSummary(this);
   }
 
 }

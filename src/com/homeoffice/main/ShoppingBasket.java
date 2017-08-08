@@ -1,5 +1,4 @@
 package com.homeoffice.main;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -43,17 +42,34 @@ public class ShoppingBasket
     shoppingBasket.items.addAll(Arrays.asList(item));
   }
 
-  public String calculatePrice()
+  public String getItemsSummary()
   {
     ShoppingBasketVisitor visitor = new ShoppingBasketVisitorImpl();
-    DecimalFormat df = new DecimalFormat("#.##");
+    StringBuilder builder = new StringBuilder();
+
+    for (Item item : shoppingBasket.items)
+    {
+      builder.append(item.summary(visitor)).append("\n");
+    }
+
+    return builder.toString();
+  }
+
+  public int getItemsCount()
+  {
+    return shoppingBasket.items.size();
+  }
+
+  public double calculateTotalPrice()
+  {
+    ShoppingBasketVisitor visitor = new ShoppingBasketVisitorImpl();
     double sum = 0.0;
 
     for (Item item : shoppingBasket.items)
     {
-      sum = sum + item.accept(visitor);
+      sum = sum + item.count(visitor);
     }
 
-    return df.format(sum);
+    return sum;
   }
 }
