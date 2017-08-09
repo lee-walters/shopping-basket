@@ -7,11 +7,10 @@ import com.homeoffice.visitors.ShoppingBasketVisitor;
  * Concrete item
  *
  */
-public class Milk implements Item
+public class Milk extends BaseItem implements Item
 {
   private double pricePerLitre;
   private double litres;
-  private String name;
 
   /**
    * Overloaded constructor to use default unit cost
@@ -53,16 +52,6 @@ public class Milk implements Item
   public void setLitres(double litres)
   {
     this.litres = litres;
-  }
-
-  public String getName()
-  {
-    return name;
-  }
-
-  public void setName(String name)
-  {
-    this.name = name;
   }
 
   @Override

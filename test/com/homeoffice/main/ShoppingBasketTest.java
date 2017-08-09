@@ -1,6 +1,6 @@
 package com.homeoffice.main;
 
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 
@@ -70,7 +70,7 @@ public class ShoppingBasketTest
     int preAdditionSize = shoppingBasket.getItemsCount();
     shoppingBasket.addItem(new Milk(0.45, 2, "Semi-skimmed"));
 
-    assertThat(shoppingBasket.getItemsCount(), is(preAdditionSize + 1));
+    assertThat(shoppingBasket.getItemsCount(), is(greaterThan(preAdditionSize)));
   }
 
   @Test

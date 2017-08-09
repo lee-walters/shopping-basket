@@ -7,12 +7,10 @@ import com.homeoffice.visitors.ShoppingBasketVisitor;
  * Concrete item
  *
  */
-public class Fruit implements Item
+public class Fruit extends BaseItem implements Item
 {
   private double pricePerKg;
   private double weight;
-  private String name;
-
 
   /**
    * Overloaded constructor to use default unit cost
@@ -54,16 +52,6 @@ public class Fruit implements Item
   public void setWeight(double weight)
   {
     this.weight = weight;
-  }
-
-  public String getName()
-  {
-    return name;
-  }
-
-  public void setName(String name)
-  {
-    this.name = name;
   }
 
   @Override
